@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Холодильник</title>
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+</head>
+<body>
+
+  <main>
+    <h1>🍳 Список продуктов</h1>
+
+    <input id="productInput" type="text">
+    <button id="addButton">Добавить</button>
+
+    <ul id="productList">
+        <li>Хлеб</li>
+        <li>Йогурт</li>
+    </ul>
+
+
+    </main>
+
+    <!-- Модальное окно для ошибок -->
+  <dialog id="errorModal">
+    <h3>⚠️ Ошибка</h3>
+    <p id="errorMessage"></p>
+    <button id="closeModalBtn" type="button">Закрыть</button>
+  </dialog>
+
+  <!-- Тип модуль укзаывает на то, что в данном файле нам нужны импорт и экспорт -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
