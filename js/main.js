@@ -43,9 +43,8 @@ fridgeLitValue.addEventListener("click", (e) => {
     } else {
       e.target.textContent = e.target.textContent.replace("v", "");
     }
-    // e.target.style.textDecoration = "line-through";
   }
-  //#2 ВТОРОЙ СПОСОБ: зачеркивание/!зачеркивание продукта
+  //#2 ВТОРОЙ СПОСОБ: зачеркивание/ продукта
   // if (e.target.tagName === "LI") {
   //   if (e.target.style.textDecoration === "line-through") {
   //     e.target.style.textDecoration = "none";
