@@ -1,10 +1,10 @@
-// import { getListValue } from "./listFridgeService";
+import { products } from "./config.js";
+import { addSortNewListProducts } from "./sortingArray.js";
 
 const userInputField = document.querySelector("#productInput");
 const buttonAdd = document.querySelector("#addButton");
+const buttonList = document.querySelector("#listButton");
 const fridgeLitValue = document.querySelector("#productList");
-const dishTitleInput = document.querySelector("#dishTitle");
-const productName = document.querySelector("#productName");
 
 const errorModal = document.querySelector("#errorModal");
 const errorMessage = document.querySelector("#errorMessage");
@@ -15,18 +15,50 @@ closeModalBtn.addEventListener("click", () => {
   errorModal.close();
 });
 
+const userArray = [];
+
 buttonAdd.addEventListener("click", (e) => {
   e.preventDefault();
+
   try {
     if (!userInputField.value || !userInputField.value.trim()) {
       throw new Error("The name of the product is required!");
     }
     const UserInputFieldValue = userInputField.value.trim();
+    const currentListProducts = fridgeLitValue.querySelectorAll("li"); //ищем все li в ul
+
+    currentListProducts.forEach((element) => {
+      //сравнимаем ввод пользователя с тем, что есть в ul >>> в li
+      if (
+        element.textContent.trim().toLowerCase() ===
+        UserInputFieldValue.toLowerCase()
+      ) {
+        throw new Error("The product already exist!");
+      }
+    });
     const newLi = document.createElement("li");
     newLi.textContent = UserInputFieldValue;
     fridgeLitValue.append(newLi);
+    userArray.push(newLi.textContent);
     userInputField.value = "";
+    console.log(userArray);
 
+    userInputField.focus(); //снова делаем активным поле ввода, чтобы пользователь не нажимал повторно
+  } catch (error) {
+    // В случае ЛЮБОЙ ошибки
+    errorMessage.textContent = error.message;
+    errorModal.showModal(); // Показываем модалку
+  }
+});
+
+buttonList.addEventListener("click", (e) => {
+  e.preventDefault();
+  fridgeLitValue.innerHTML = ""; //очищаем список
+  try {
+    const sortArray = [];
+    addSortNewListProducts(products, sortArray, userArray, fridgeLitValue);
+
+    userInputField.value = "";
     userInputField.focus(); //снова делаем активным поле ввода, чтобы пользователь не нажимал повторно
   } catch (error) {
     // В случае ЛЮБОЙ ошибки
